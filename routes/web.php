@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 
 /*
@@ -15,3 +16,8 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', [PageController::class, 'index'])->name('index');
+Route::get('/create-profil', [AuthController::class, 'index'])->name('index-create-profil');
+Route::post('/store-profil', [AuthController::class, 'store'])->name('store-profil');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/home', [PageController::class,'home'])->name('home');
