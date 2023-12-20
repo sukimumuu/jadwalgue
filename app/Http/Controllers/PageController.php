@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
     public function index(){
-        return view('Auth.index');
+        $data = User::all();
+        return view('Auth.index', compact('data'));
     }
 
     public function home(){
