@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -18,12 +19,18 @@ class AuthController extends Controller
             'password' => 'required|min:8',
             'avatar' => 'dimensions:min_width=100,min_height=100',
         ]);
-        $data = User::create($req->all());
+        $data = User::create([
+           'name' => $req->name,
+           'avatar' => $req->avatar,
+           'password' => Hash::make($req['password']),
+        ]);
         if($req->hasFile('avatar')){
          $req->file('avatar')->move('avatar/', $req->file('avatar')->getClientOriginalName());
          $data->avatar = $req->file('avatar')->getClientOriginalName();
          $data->save();
         }
+
+        Auth::login($data);
         return redirect()->route('home')->with('success', 'Membuat profil berhasil');
     }
 
@@ -32,4 +39,15 @@ class AuthController extends Controller
         return redirect()->route('index');
     }
 
+    public function login(Request $request)
+    {
+        $credentials = $request->only('name', 'password');
+        // Mencocokan data pengguna berdasarkan 'username'
+        if (Auth::attempt($credentials)) {
+            // Berhasil login
+            return redirect()->route('home');
+        }
+        // Gagal login
+        return redirect()->route('login')->with('error', 'Invalid username or password');
+    }
 }
