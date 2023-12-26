@@ -48,6 +48,6 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
         // Gagal login
-        return redirect()->route('login')->with('error', 'Invalid username or password');
+        return redirect()->back();
     }
 }
