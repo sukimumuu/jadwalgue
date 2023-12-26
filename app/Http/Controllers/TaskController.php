@@ -27,4 +27,9 @@ class TaskController extends Controller
 
         return back(); // Redirect back to the previous page
     }
+    public function destroy($id){
+        $data = Task::find($id);
+        $data->delete();
+        return back();
+    }
 }

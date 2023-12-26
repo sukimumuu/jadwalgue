@@ -27,3 +27,4 @@ Route::get('/home', [PageController::class,'home'])->name('home');
 Route::get('/buat-task', [PageController::class,'task'])->name('task');
 Route::post('/buat-task', [TaskController::class,'create'])->name('task-create');
 Route::patch('/complete-task/{id}', [TaskController::class, 'completeTask'])->name('complete-task');
+Route::get('/destroy/{id}', [TaskController::class, 'destroy'])->name('destroy');

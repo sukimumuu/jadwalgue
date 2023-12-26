@@ -50,7 +50,7 @@
                             <i class="fa-solid fa-square-check text-teal-800 text-2xl"></i>
                         </button>
                     </form>
-                    <a href="#"><i class="fa-solid fa-square-xmark text-red-800 text-2xl"></i></a>
+                    <a href="{{ route('destroy', ['id' =>$toArray['id']]) }}"><i class="fa-solid fa-square-xmark text-red-800 text-2xl"></i></a>
                 @endif
               </td>
             </tr>
