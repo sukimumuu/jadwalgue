@@ -30,10 +30,18 @@
         <p class="text-base p-2">Strukturkan harimu dengan mudah. Aplikasi To-Do List kami membantu Anda membuat jadwal yang terorganisir, memberikan Anda kendali penuh atas waktu Anda.</p>
         <a href="{{ route('task') }}"><button class="block mx-auto w-11/12 h-8 text-white font-semibold rounded bg-green-600 text-center font-sans">Tugas baru +</button></a>
         <div class="mt-4 p-2">
+          @php
+              $prevDate = null;
+          @endphp
           @foreach ($data as $toArray)
-          <div class="border-b-2 border-black">
-            <p class="text-xl">{{ $toArray['formatted_date'] }}</p>
-          </div>
+          @if ($toArray['formatted_date'] != $prevDate)
+              <div class="border-b-2 border-black">
+                  <p class="text-xl">{{ $toArray['formatted_date'] }}</p>
+              </div>
+              @php
+                  $prevDate = $toArray['formatted_date'];
+              @endphp
+          @endif
           <table class="w-full mt-2 text-lg">
             <tr>
               <td class="w-1/5">{{ $toArray['formatted_time'] }}</td>
