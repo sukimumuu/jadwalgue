@@ -19,12 +19,12 @@ use App\Http\Controllers\TaskController;
 
 Route::get('/', [PageController::class, 'index'])->name('index');
 Route::post('/login-auth', [AuthController::class, 'login'])->name('login-auth');
-
-Route::middleware(['auth'])->group(function () {
 Route::get('/create-profil', [AuthController::class, 'index'])->name('index-create-profil');
 Route::post('/store-profil', [AuthController::class, 'store'])->name('store-profil');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/login/{id}', [PageController::class, 'login'])->name('login');
+
+Route::middleware(['auth'])->group(function () {
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/home', [PageController::class,'home'])->name('home');
 Route::get('/buat-task', [PageController::class,'task'])->name('task');
 Route::post('/buat-task', [TaskController::class,'create'])->name('task-create');

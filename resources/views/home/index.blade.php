@@ -29,39 +29,32 @@
         <h3 class="text-lg font- p-2">Halo {{ Auth::user()->name }}</h3>
         <p class="text-base p-2">Strukturkan harimu dengan mudah. Aplikasi To-Do List kami membantu Anda membuat jadwal yang terorganisir, memberikan Anda kendali penuh atas waktu Anda.</p>
         <a href="{{ route('task') }}"><button class="block mx-auto w-11/12 h-8 text-white font-semibold rounded bg-green-600 text-center font-sans">Tugas baru +</button></a>
-        <div class="mt-4 p-2">
-          @php
-              $prevDate = null;
-          @endphp
-          @foreach ($data as $toArray)
-          @if ($toArray['formatted_date'] != $prevDate)
+        <div class="mt-4 p-2"> 
+          @foreach ($groupTask as $toArray => $tasks)
               <div class="border-b-2 border-black">
-                  <p class="text-xl">{{ $toArray['formatted_date'] }}</p>
+                  <p class="text-xl">{{ $toArray }}</p>
               </div>
-              @php
-                  $prevDate = $toArray['formatted_date'];
-              @endphp
-          @endif
           <table class="w-full mt-2 text-lg">
+            @foreach ($tasks as $task)
             <tr>
-              <td class="w-1/5">{{ $toArray['formatted_time'] }}</td>
-              <td class="w-3/5">{{ $toArray['task'] }}</td>
-
+              <td class="w-1/5">{{ $task['formatted_time'] }}</td>
+              <td class="w-3/5">{{ $task['task'] }}</td>
               <td class="w-1/5" id="taskDescription_{{ $loop->index }}">
-               @if ($toArray['completed'])
+                @if ($task['completed'])
                     <span class="text-green-500">Task Complete</span>
-                @else
-                    <form method="post" action="{{ route('complete-task', ['id' => $toArray['id']]) }}">
-                        @csrf
+                    @else
+                    <form method="post" action="{{ route('complete-task', ['id' => $task['id']]) }}">
+                      @csrf
                         @method('patch')
                         <button type="submit" class="text-teal-800">
                             <i class="fa-solid fa-square-check text-teal-800 text-2xl"></i>
-                        </button>
+                          </button>
                     </form>
-                    <a href="{{ route('destroy', ['id' =>$toArray['id']]) }}"><i class="fa-solid fa-square-xmark text-red-800 text-2xl"></i></a>
-                @endif
-              </td>
-            </tr>
+                    <a href="{{ route('destroy', ['id' =>$task['id']]) }}"><i class="fa-solid fa-square-xmark text-red-800 text-2xl"></i></a>
+                    @endif
+                  </td>
+                </tr>
+                @endforeach
           </table>
           @endforeach
         </div>

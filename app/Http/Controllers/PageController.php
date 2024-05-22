@@ -16,19 +16,23 @@ class PageController extends Controller
 
     public function home(){
        $array = Task::select('id','date', 'time', 'task','completed')->get();
-        // Transformasi setiap elemen dalam koleksi
-        $data = $array->map(function ($item) {
-            return [
-                'id' => $item->id,
-                'formatted_time' => Carbon::parse($item->time)->format('H:i'),
-                'formatted_date' => Carbon::parse($item->date)->format('F j, Y'),
-                'task' => $item->task,
-                'completed' => $item->completed,
+       // Transformasi setiap elemen dalam koleksi
+       $data = $array->map(function ($item) {
+           return [
+               'id' => $item->id,
+               'formatted_time' => Carbon::parse($item->time)->format('H:i'),
+               'formatted_date' => Carbon::parse($item->date)->format('F j, Y'),
+               'task' => $item->task,
+               'completed' => $item->completed,
             ];
         });
-
         // Kembalikan data menggunakan compact
-        return view('home.index', compact('data'));
+        $groupTask = [];
+        foreach($data as $task){
+            $groupTask[$task['formatted_date']][] = $task;
+        }
+        
+        return view('home.index', compact('data','groupTask'));
     }
 
     public function login($id){

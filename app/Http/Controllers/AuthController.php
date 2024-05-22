@@ -21,7 +21,6 @@ class AuthController extends Controller
         ]);
         $data = User::create([
            'name' => $req->name,
-           'avatar' => $req->avatar,
            'password' => Hash::make($req['password']),
         ]);
         if($req->hasFile('avatar')){
