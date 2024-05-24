@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function main(){
-        return view('home.main');
+        return view('home.main',[
+            'title' => 'JadwalGue'
+        ]);
     }
 }

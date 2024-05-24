@@ -13,3 +13,26 @@
         opacity: 1;
     }
 }
+
+.zoom-out {
+    animation: zoomIn 0.8s ease-in-out;
+}
+@keyframes zoomIn {
+    from{
+        left: -50%;
+    }
+    to {
+        left: 50%;
+    }   
+}
+.slide-out {
+    animation: slideOut 0.8s ease-in-out forwards;
+}
+@keyframes slideOut {
+    from{
+        left: 50%;
+    }
+    to {
+        left: -50%;
+    }   
+}
