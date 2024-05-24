@@ -2,6 +2,6 @@
     <span>
         {{ $tanggal }}
     </span>
-    <a href=""><i class="fa-solid fa-user"></i></a>
-    <a href="{{ route('logout') }}"><i class="fa-solid fa-power-off"></i></a>
+    <a href="#"><i class="fa-solid fa-user"></i></a>
+    <a href="#" onclick="btnLogout()"><i class="fa-solid fa-power-off"></i></a>
 </nav>
