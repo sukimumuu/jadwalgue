@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -35,4 +36,13 @@ class AuthController extends Controller
         return redirect()->route('main');
     }
 
+    public function store_complete_profil(Request $request,$id){
+        $nameAvataarTmp = Str::random(9).'.'.$request->file('avatar')->getClientOriginalExtension();
+        $request->file('avatar')->move('avatar-user/', $nameAvataarTmp);
+        $users = User::find($id)->update([
+            'name' => $request->name,
+            'avatar' => $nameAvataarTmp,
+        ]);
+        return redirect()->route('index');
+    }
 }

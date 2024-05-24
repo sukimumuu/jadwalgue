@@ -4,7 +4,16 @@
 <body class="nunito">
     <div class="z-0 relative w-screen h-screen blur">
         <div class="flex">
-            @include('components.partials.sidebar')
+            <div class="w-1/5 h-screen bg-emerald-400">
+                <div class="w-4/5 mx-auto h-22 text-center py-3 border-b-2 border-b-white">
+                    <h3 class="text-3xl nunito-500 text-white mb-5">Jadwal Gue</h3>
+                    <span class="nunito-500 text-white text-xl">Halo, User</span>
+                </div>
+                <ul class="w-full mt-3">
+                    <li class="w-11/12 rounded-tr-xl rounded-br-xl h-10 items-center flex px-3 gap-3 text-white nunito-400 text-lg hover:bg-orange-400 cursor-pointer bg-orange-400"><a href=""><i class="fa-solid fa-clipboard-list w-6"></i> Hari Ini</a></li>
+                    <li class="w-11/12 rounded-tr-xl rounded-br-xl h-10 items-center flex px-3 gap-3 text-white nunito-400 text-lg hover:bg-orange-400 cursor-pointer "><a href=""><i class="fa-solid fa-rectangle-list w-6"></i> Prioritas</a></li>
+                </ul>
+            </div>  
             <div class="w-4/5">
                 @include('components.partials.navbar')
             </div>
@@ -14,7 +23,7 @@
             <span class="absolute top-2 right-4 underline underline-offset-4 cursor-pointer" onclick="skipStep()">Lewati</span>
             <p class="text-lg mb-5 nunito-600 cursor-default">Lengkapi Profil Kamu</p>
             <div class="w-4/6 mx-auto">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="{{ route('store-complete-profil', ['id'=>Auth::user()->id]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                         <label for="avatar" class="nunito-500 cursor-default">Foto Profil</label>
                         <div class="w-44 h-44 mx-auto flex items-center justify-center rounded-full bg-slate-200">

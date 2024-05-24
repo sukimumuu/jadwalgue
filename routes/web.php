@@ -21,4 +21,4 @@ Route::get('/jadwalgue/beranda', [PagesController::class,'index'])->name('index'
 Route::get('/jadwalgue/complete-profil', [AuthController::class,'complete_profil'])->name('complete-profil');
 Route::post('/jadwalgue/create-profil', [AuthController::class,'store_user'])->name('store-profil');
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');
-
+Route::post('/jadwalgue/store-complete-profil/{id}', [AuthController::class, 'store_complete_profil'])->name('store-complete-profil');
