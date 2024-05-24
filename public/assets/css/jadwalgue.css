@@ -1,9 +1,9 @@
-.slide-in {
+.slide-left {
     display: block;
-    animation: slideIn 1.2s ease-in-out;
+    animation: slideLeft 1.2s ease-in-out;
 }
 
-@keyframes slideIn {
+@keyframes slideLeft {
     from {
         right: -50%;
         opacity: 0;
@@ -11,6 +11,49 @@
     to {
         right: 0;
         opacity: 1;
+    }
+}
+.slide-left-out {
+    animation: slideLeftOut 1.2s ease-out forwards;
+}
+
+@keyframes slideLeftOut {
+    from {
+        right: 0%;
+        opacity: 1;
+    }
+    to {
+        right: -50%;
+        opacity: 0;
+    }
+}
+.slide-right {
+    display: block;
+    animation: slideRight 1.2s ease-in-out;
+}
+
+@keyframes slideRight {
+    from {
+        left: -50%;
+        opacity: 0;
+    }
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+.slide-right-out {
+    animation: slideRightOut 1.2s ease-out forwards;
+}
+
+@keyframes slideRightOut {
+    from {
+        left: 0%;
+        opacity: 1;
+    }
+    to {
+        left: -50%;
+        opacity: 0;
     }
 }
 

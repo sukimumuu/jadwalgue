@@ -21,7 +21,12 @@ class AuthController extends Controller
         Auth::login($users);
         return redirect()->route('complete-profil');
     }
-    
+    public function check_users(Request $request){
+        if(Auth::attempt($request->only('email','password'))){
+            return redirect()->route('index');
+        }
+        return back();
+    }
     public function complete_profil(){
         $dateController = new TanggalIndo();
         $date = date('Y-m-d');
